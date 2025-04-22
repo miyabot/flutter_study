@@ -36,20 +36,23 @@ class _StateSampleState extends State<StateSample> {
   @override
   Widget build(BuildContext context) {
    return Scaffold(
-        body: Column(
-          children: [
-            Text('$cnt',style: TextStyle(fontSize: 36),),
-            ElevatedButton(
-              onPressed: (){
-                //setState:画面を更新してくれる
-                setState(() {
-                  cnt++;
-                });
-                debugPrint('現在の値$cnt');
-              }, 
-              child: Text('PUSH')
-            ),
-          ],
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('$cnt',style: TextStyle(fontSize: 36),),
+              ElevatedButton(
+                onPressed: (){
+                  //setState:画面を更新してくれる
+                  setState(() {
+                    cnt++;
+                  });
+                  debugPrint('現在の値$cnt');
+                }, 
+                child: Text('PUSH')
+              ),
+            ],
+          ),
         )
       );
   }
