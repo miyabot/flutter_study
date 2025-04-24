@@ -42,7 +42,7 @@ class _FirstPageState extends State<FirstPage> {
                 //画面遷移
                 Navigator.push(
                   context, //現在位置 
-                  MaterialPageRoute(builder: (context)=>SecondPage(newCnt: cnt,)) //遷移先の引数(newCnt)に値を(cnt)渡す
+                  MaterialPageRoute(builder: (context)=>SecondFulPage(newCnt: cnt,)) //遷移先の引数(newCnt)に値を(cnt)渡す
                 );
               }, 
               child: Text('次のページ')
