@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             //ヘッダーの作成
             DrawerHeader(
-              child: Center(child: Text('ヘッダー部分')),
+              child: Center(child: Text('Header部分')),
             ),
             ListTile(
               title: Text('リストタイル１'),

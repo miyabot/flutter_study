@@ -65,7 +65,7 @@ class _TextFieldSampleState extends State<TextFieldSample> {
                     ),
                     //errorがtureであれば、「:」より左が実行、そうでなければ「:」より右が実行
                     errorText: (errorFlg == true) ? 'パスワードが正しくありません。':null,
-                    labelText: 'パスワードを入力してください',
+                    labelText: 'パスワードを入力してください。',
                     border: OutlineInputBorder()//外枠をつける
                   ),
               ),
