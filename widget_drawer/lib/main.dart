@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:widget_drawer/tile1.dart';
+import 'package:widget_drawer/tile2.dart';
+import 'package:widget_drawer/tile3.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //Drawerの作成にはAppBarが必要
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -46,15 +50,30 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: Text('リストタイル１'),
-              onTap: (){},
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context)=>const Tile1()) 
+                );
+              },
             ),
             ListTile(
               title: Text('リストタイル２'),
-              onTap: (){},
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context)=>const Tile2()) 
+                );
+              },
             ),
             ListTile(
               title: Text('リストタイル３'),
-              onTap: (){},
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context)=>const Tile3()) 
+                );
+              },
             ),
             
           ],
