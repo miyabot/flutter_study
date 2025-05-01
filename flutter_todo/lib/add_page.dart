@@ -10,8 +10,8 @@ class AddPage extends StatefulWidget {
 class _AddPageState extends State<AddPage> {
 
   //TextFieldの入力内容を監視
-  TextEditingController _controller = TextEditingController();
-
+  TextEditingController _titleController = TextEditingController();
+  TextEditingController _subTitleController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +23,17 @@ class _AddPageState extends State<AddPage> {
             SizedBox(
               width:300.0, //横幅
               child: TextField(
-                controller: _controller,//監視役の設定
+                controller: _titleController,//監視役の設定
+                decoration: InputDecoration(
+                  border: OutlineInputBorder()
+                ),
+              )
+            ),
+            SizedBox(height: 16,),
+            SizedBox(
+              width:300.0, //横幅
+              child: TextField(
+                controller: _subTitleController,//監視役の設定
                 decoration: InputDecoration(
                   border: OutlineInputBorder()
                 ),
@@ -33,11 +43,17 @@ class _AddPageState extends State<AddPage> {
             ElevatedButton(
               onPressed: (){
                 //何も入力されてなかったら戻れないようにする(早期リターン)
-                if(_controller.text == '') return;
+                if(_titleController.text == '') return;
+
+                //値をMapでまとめる(キーバリュー型)
+                final Map<String,String> result = {
+                  'title':_titleController.text,
+                  'subTitle':_subTitleController.text
+                };
 
                 //前の画面に戻る時に「_controller.text」の情報も持って帰る
-                debugPrint('持って帰る値：${_controller.text}');
-                Navigator.pop(context,_controller.text);
+                debugPrint('持って帰る値：${result['subTitle']}');
+                Navigator.pop(context,result);
               }, 
               child: Text('追加')
             )

@@ -27,22 +27,28 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   //ToDoリストの内容を管理
-  List<String> _list = [];
+  List<String> _titleList = [];
+  List<String> _subTitleList = [];
+
+  List<Map<String,String>> _list = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //Map型ではListViewの処理に向いていない
       body:ListView.builder(
         itemCount: _list.length,//リストの要素数
         //要素ごとの処理を書く
         itemBuilder: (context,index){
+          final item = _list[index];
           return ListTile(
-            title: Text(_list[index]),
+            title: Text(item['title']!),
+            subtitle: Text(item['subTitle']!),
             trailing: IconButton(
               onPressed: (){
                 setState(() {
                   //指定した場所のリストを削除
-                  _list.removeAt(index);
+                  _titleList.removeAt(index);
                 });
               },
               icon: Icon(Icons.delete),
@@ -55,7 +61,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () async{
           //戻ってきた値を格納する変数
           //?:NULL許容型
-          final String result;
+          final Map<String,String> result;
 
           //画面遷移
           result = await Navigator.push(
@@ -65,6 +71,8 @@ class _HomePageState extends State<HomePage> {
 
           setState(() {
             //add:リストに追加
+            //_titleList.add(result['title']!);
+            //_subTitleList.add(result['subTitle']!);
             _list.add(result);
           });
           
