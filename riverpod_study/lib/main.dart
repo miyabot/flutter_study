@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_study/a.dart';
 import 'package:riverpod_study/b.dart';
 import 'package:riverpod_study/c.dart';
+import 'package:riverpod_study/input.dart';
 
 void main() {
-  runApp(const Base());
+  //ProviderScope:監視の範囲
+  runApp(ProviderScope(child: const Base()));
 }
 
 class Base extends StatelessWidget {
@@ -13,19 +16,20 @@ class Base extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home:_RiverpodStudy()
+      home:RiverStudy()
     );
   }
 }
 
-class _RiverpodStudy extends StatefulWidget {
-  const _RiverpodStudy({super.key});
+
+class RiverStudy extends ConsumerStatefulWidget {
+  const RiverStudy({super.key});
 
   @override
-  State<_RiverpodStudy> createState() => __RiverpodStudyState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _RiverStudyState();
 }
 
-class __RiverpodStudyState extends State<_RiverpodStudy> {
+class _RiverStudyState extends ConsumerState<RiverStudy> {
 
   //選択中のアイテムを管理
   int _selectIndex = 0;
@@ -39,20 +43,22 @@ class __RiverpodStudyState extends State<_RiverpodStudy> {
 
   @override
   Widget build(BuildContext context) {
+
+    //リアルタイムで更新する必要があるため、build内で記載する
+    final selectNum = ref.watch(selectNumProvider);
+
     return Scaffold(
 
-      body:_page[_selectIndex],
+      body:_page[selectNum],
 
       //画面下部のバー
       bottomNavigationBar: BottomNavigationBar(
 
-        currentIndex: _selectIndex,//選択中のアイテム番号の指定
+        currentIndex: selectNum,//選択中のアイテム番号の指定
 
         //index:選択されたアイテムの番号が入っている
         onTap: (index){
-          setState(() {
-            _selectIndex = index;
-          });
+          ref.read(selectNumProvider.notifier).state = index;
         },
 
         //アイコンの設定
@@ -61,6 +67,13 @@ class __RiverpodStudyState extends State<_RiverpodStudy> {
           BottomNavigationBarItem(icon: Icon(Icons.edit),label: 'edit'),
           BottomNavigationBarItem(icon: Icon(Icons.search),label: 'search'),
         ]
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          //削除
+          ref.read(textProvider.notifier).state = '';
+        },
+        child: Icon(Icons.delete),
       ),
     );
   }

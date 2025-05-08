@@ -1,24 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_study/input.dart';
 
-class B extends StatefulWidget {
+
+//riverpod版のstateful
+class B extends ConsumerStatefulWidget {
   const B({super.key});
 
   @override
-  State<B> createState() => _BState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _BState();
 }
 
-class _BState extends State<B> {
+class _BState extends ConsumerState<B> {
   final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: TextField(
-          controller: _controller, //コントローラーの設定
-          decoration: InputDecoration(
-            border: OutlineInputBorder()
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _controller, //コントローラーの設定
+              decoration: InputDecoration(
+                border: OutlineInputBorder()
+              ),
+            ),
+            ElevatedButton(
+              onPressed: (){
+                //入力内容の保存
+                //read(単発取得)：現在の値が取得できる
+                //ref.read(textProvider.notifier).state = '新しい値'
+                ref.read(textProvider.notifier).state = _controller.text;
+              }, 
+              child: Text('保存')
+            )
+          ],
         )
       ),
     );
