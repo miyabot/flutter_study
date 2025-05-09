@@ -12,7 +12,8 @@ class A extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //watch(監視し続ける)
     //textproviderの状態を監視し、変更されるたびに画面の更新をかける
-    final text = ref.watch(textProvider);
+    
+    final text = ref.watch(textProviderProvider);
 
     return Scaffold(
       body: Center(

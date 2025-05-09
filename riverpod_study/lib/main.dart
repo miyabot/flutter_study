@@ -32,7 +32,7 @@ class RiverStudy extends ConsumerStatefulWidget {
 class _RiverStudyState extends ConsumerState<RiverStudy> {
 
   //選択中のアイテムを管理
-  int _selectIndex = 0;
+  //final int _selectIndex = 0;
 
   //ページを管理
   final List<Widget> _page = [
@@ -71,7 +71,7 @@ class _RiverStudyState extends ConsumerState<RiverStudy> {
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           //削除
-          ref.read(textProvider.notifier).state = '';
+          ref.read(textProviderProvider.notifier).deleteText();
         },
         child: Icon(Icons.delete),
       ),

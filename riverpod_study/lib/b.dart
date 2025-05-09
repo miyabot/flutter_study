@@ -31,8 +31,7 @@ class _BState extends ConsumerState<B> {
               onPressed: (){
                 //入力内容の保存
                 //read(単発取得)：現在の値が取得できる
-                //ref.read(textProvider.notifier).state = '新しい値'
-                ref.read(textProvider.notifier).state = _controller.text;
+                ref.read(textProviderProvider.notifier).setText(_controller.text);
               }, 
               child: Text('保存')
             )
