@@ -1,4 +1,5 @@
 //Riverpodのインポート
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'input.g.dart';
@@ -15,8 +16,16 @@ class TextProvider extends _$TextProvider {
     //build:必須
     @override
     String build() {
+
+        //providerは誰もwatchしなくなった瞬間にデータを捨てる
+        debugPrint('Watchを開始');
+
+        //onDispose：Providerが監視されなくなった時に呼ばれる
+        ref.onDispose(() {
+         debugPrint('Watchを終了');
+        });
         //初期状態の設定
-        return 'おはよう';
+        return '';
     }
 
     //削除関数

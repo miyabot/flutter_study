@@ -6,7 +6,7 @@ part of 'input.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$textProviderHash() => r'e72654b3dec3f774858df93f2dce8e479e10e845';
+String _$textProviderHash() => r'083a2b86b8275f80c7c9a3211d618c15263926a7';
 
 /// See also [TextProvider].
 @ProviderFor(TextProvider)

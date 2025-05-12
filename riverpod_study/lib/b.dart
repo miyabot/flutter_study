@@ -13,9 +13,11 @@ class B extends ConsumerStatefulWidget {
 
 class _BState extends ConsumerState<B> {
   final TextEditingController _controller = TextEditingController();
+  
 
   @override
   Widget build(BuildContext context) {
+    //ref.watch(textProviderProvider);
     return Scaffold(
       body: Center(
         child: Column(

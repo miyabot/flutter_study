@@ -30,12 +30,30 @@ class _ToDoPageState extends ConsumerState<ToDoPage> {
   @override
   Widget build(BuildContext context) {
     final list = ref.watch(myListProvider);
+    //Map型のままだとListView.builderでエラーが出るので、List型に変換する
+    //Map<String,bool> → List<Map<String,bool>>
+    final entries = list.entries.toList();
+
     return Scaffold(
       body:ListView.builder(
-        itemCount: list.length,//要素数
+        itemCount: entries.length,//要素数
         itemBuilder: (context,index){
           return ListTile(
-            title:Text(list[index]),//要素の表示
+            leading: IconButton(
+              onPressed: (){
+                ref.read(myListProvider.notifier).toggle(entries[index].key);
+              }, 
+              icon:(entries[index].value == false) ? 
+                Icon(Icons.favorite) : 
+                Icon(Icons.favorite,color: Colors.pink,)
+            ),
+            title:Text(entries[index].key),//要素の表示
+            trailing: IconButton(
+              onPressed: (){
+                ref.read(myListProvider.notifier).remove(entries[index].key);
+              }, 
+              icon: Icon(Icons.delete)
+            )
           );
         },
       ),
@@ -45,9 +63,7 @@ class _ToDoPageState extends ConsumerState<ToDoPage> {
             context, 
             MaterialPageRoute(builder: (context)=>AddList())
           );
-          setState(() {
-            list.add(result);
-          });
+          ref.read(myListProvider.notifier).addResult(result);
         },
         child: Icon(Icons.add),
         
