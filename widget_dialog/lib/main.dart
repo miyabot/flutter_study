@@ -70,7 +70,37 @@ class _MyHomePageState extends State<MyHomePage> {
               builder: (context)=>AlertDialog(
                 backgroundColor: Colors.white, //背景色
                 title: Center(child: Text('アカウント削除',style: TextStyle(fontWeight: FontWeight.bold),)), //タイトル
-                content: Text('削除すると以下の情報がすべて失われます'), //本文
+                content: Column(
+                  //内容に合わせて最小限の高さになる
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('削除すると以下の情報がすべて失われます'),
+                    SizedBox(height: 24,),
+                    Container(
+                      //見た目の変更
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(48, 158, 158, 158),
+                        borderRadius:BorderRadius.circular(10) 
+                      ),
+                      //余白の追加
+                      padding:EdgeInsets.all(12),
+                      height: 150.0,
+                      width: 250.0,
+                      child: Column(
+                        //左端
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('・プロフィール権限',style: TextStyle(fontSize: 16),),
+                          Text('・写真データ',style: TextStyle(fontSize: 16),),
+                          Text('・メッセージ',style: TextStyle(fontSize: 16),),
+                          Text('・お気に入り',style: TextStyle(fontSize: 16),),
+                          Text('・フォロー/フォロワ―',style: TextStyle(fontSize: 16),),
+                        ],
+                      ),
+                    )
+                  ],
+                ), //本文
                 actions: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,//等間隔に並べる
@@ -78,8 +108,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       ElevatedButton(
                         //見た目の変更
                         style:ElevatedButton.styleFrom(
-                          minimumSize: Size(100,50),
-                          backgroundColor: Colors.white
+                          minimumSize: Size(120,50),
+                          //角丸
+                          shape:RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          backgroundColor: Colors.white,
+                          side: BorderSide()
                         ),
                         onPressed: (){
                           Navigator.pop(context);  
@@ -88,7 +123,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       ElevatedButton(
                         style:ElevatedButton.styleFrom(
-                          minimumSize: Size(100,50),
+                          minimumSize: Size(120,50),
+                          //角丸
+                          shape:RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
                           backgroundColor: const Color.fromARGB(255, 250, 115, 105)
                         ),
                         onPressed: (){
